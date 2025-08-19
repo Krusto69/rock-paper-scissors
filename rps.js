@@ -1,73 +1,86 @@
 
 // Your JavaScript goes here!
 function get_computer_choice() {
-    const options = ["Rock", "Paper", "Scissors"];
+    const options = ["rock", "paper", "scissors"];
     let random_number = Math.floor(Math.random() * 3)
-    // console.log(random_number);
+    // alert(random_number);
     let computer_choice = options[random_number]
     return computer_choice;
 }
 
-function get_human_choice(){
-    user_choice = prompt("Please enter your choice between 'Rock', 'Paper' and 'Scissors'");
-    return user_choice;
+const optionButtons = document.querySelector(".container");
+
+optionButtons.addEventListener("click", play);
+
+function win(whom){
+    if(whom == "human"){
+        let score = document.querySelector(".humanScore");
+        //console.log(score.innerHTML);
+        score.textContent = parseInt(score.textContent) + 1;
+    } else {
+        let score  = document.querySelector(".computerScore");
+        //console.log(score.textContent);
+        score.textContent = parseInt(score.textContent) + 1;
+    }
 }
 
-function play() {
+function play(event) {
 
-    console.log("Good Luck!");
-
-    let human_choice = get_human_choice();
-    // console.log(human_choice);
+    let human_choice = event.target.id
+    console.log(human_choice)
+    // alert(human_choice);
     let computer_choice = get_computer_choice();
-    // console.log(computer_choice);
+    // alert(computer_choice);
     switch (human_choice) {
-        case "Rock":
+        case "rock":
             switch (computer_choice) {
-                case "Rock":
-                    console.log("It's a Draw");
+                case "rock":
+                    alert("It's a Draw");
                     break;
-                case "Scissors": 
-                    console.log("You Win!");
+                case "scissors": 
+                    alert("You Win!");
+                    win("human")
                     break;
-                case "Paper": 
-                    console.log("Computer Wins!");
+                case "paper": 
+                    alert("Computer Wins!");
+                    win("computer")
                     break;
             }
             break;
 
-        case "Paper":
+        case "paper":
             switch (computer_choice) {
-                case "Paper":
-                    console.log("It's a Draw");
+                case "paper":
+                    alert("It's a Draw");
                     break;
-                case "Rock": 
-                    console.log("You Win!");
+                case "rock": 
+                    alert("You Win!");
+                    win("human")
                     break;
-                case "Scissors": 
-                    console.log("Computer Wins!");
+                case "scissors": 
+                    alert("Computer Wins!");
+                    win("computer")
                     break;
             }
             break;
 
-        case "Scissors":
+        case "scissors":
             switch (computer_choice) {
-                case "Scissors":
-                    console.log("It's a Draw");
+                case "scissors":
+                    alert("It's a Draw");
                     break;
-                case "Paper": 
-                    console.log("You Win!");
+                case "paper": 
+                    alert("You Win!");
+                    win("human")
                     break;
-                case "Rock": 
-                    console.log("Computer Wins!");
+                case "rock": 
+                    alert("Computer Wins!");
+                    win("computer")
                     break;
             }
             break;
 
         default:
-            console.log("Invalid choice! Please select Rock, Paper, or Scissors.");
+            alert("Invalid choice! Please select rock, paper, or scissors.");
     }
 }
-
-play()
-
